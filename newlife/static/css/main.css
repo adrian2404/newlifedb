@@ -1,0 +1,56 @@
+/* Global styles */
+.alert{
+	margin: 10px 0 5px 0;
+}
+
+#group-selector{
+	margin-top: 20px;
+}
+
+#group-selector select{
+	height: 30px;
+	width: 80%;
+	margin: 0%;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	line-height: 30px;
+	color: #555555;
+}
+h1,h2,h3,h4,h5,h6{
+	font-weight: bold;
+}
+
+/* Footer styles */
+#footer{
+	border-top: 1px solid #ddd;
+	padding-top: 5px;
+}
+
+
+#addgr{
+	margin-top: 20px;
+	text-align: center;
+	
+}
+.month-flipper{
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+label{
+	text-align: right;
+	padding-top: 5px;
+	font-weight: normal;
+}
+#bt-block{
+	background-color: #f2f2f2;
+	text-align: center;
+	width: 100%;
+	height: 60px;
+	padding-top: 15px;
+	padding-left: 45px;
+}
+select, textarea, input{
+	max-width: 300px;
+}

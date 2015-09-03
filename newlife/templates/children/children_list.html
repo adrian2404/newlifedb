@@ -1,0 +1,88 @@
+{% extends "children/base.html" %}
+
+{% block meta_title %}Список учасників програми підтримки {% endblock meta_title %}
+
+{% block title %} Список учасників програми підтримки{% endblock title %}
+
+{% load static from staticfiles %}
+
+{%block content%} {{children}}
+<a href="{% url "home" %}" class="btn btn-primary">Додати Студента</a>
+					{% if children %}
+					<!-- Start table-->
+					<table class="table"> 
+					{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+						<thead>
+							<tr>
+								<th>
+								<a href="{% url "home" %}?order_by=id{% if order_by == 'id'  and reverse != '1' %}&amp;reverse=1{% endif %}">#
+								{% if order_by == 'id'  and reverse != '1' %}&uarr;{%  elif order_by == 'id'  and reverse == '1'  %} &darr; {%endif%}
+								</a>
+								</th>
+
+								<th>Фото</th>
+
+								<th>
+								<a href="{% url "home" %}?order_by=last_name{% if order_by == 'last_name'  and reverse != '1' %}&amp;reverse=1{% endif %}">Прізвище
+								{% if order_by == 'last_name'  and reverse != '1' %}&uarr;{%  elif order_by == 'last_name'  and reverse == '1'  %} &darr; {%endif%}
+								</a>
+								</th>
+								
+								<th>
+								<a href="{% url "home" %}?order_by=first_name{% if order_by == 'first_name'  and reverse != '1' %}&amp;reverse=1{% endif %}">І'мя
+								{% if order_by == 'first_name'  and reverse != '1' %}&uarr;{%  elif order_by == 'first_name'  and reverse == '1'  %} &darr; {%endif%}
+								</a>
+								</th>
+
+								<th>
+								Проблема
+								</th>
+								
+								<th>Дії</th> 
+							</tr>
+						</thead>
+						<tbody>
+							{% for child in children %}
+							<tr>
+								<td>{{child.id}}</td>
+								<td>{{children}}
+								{%if child.photo %}
+								<img class="img-circle" src="{{ child.photo.url }}" height="30" width="30">
+								{%else%}
+								<img class="img-circle" src="{% static "img/default-user.png" %}" height="30" width="30">
+								{%endif%}
+								</td>
+								<td><a href="{% url "children_edit" child.id %}">{{child.last_name}}</a></td>
+								<td><a href="{% url "children_edit" child.id %}">{{child.first_name}}</a></td>
+								<td>{{child.problem}}</td>
+								<td>
+									<div class="btn-group">
+									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									    Дії 
+									    <span class="caret"></span>
+									  </button>
+										  <ul class="dropdown-menu" role="menu">
+											    <li><a href="{% url "children_edit" child.id %}">Редагувати</a></li>
+											    <li><a href="{% url "children_delete" child.id %}">Видалити</a></li>
+										  </ul>
+									</div>
+								</td>
+							</tr> 
+							{% endfor %}
+						</tbody>
+					</table>
+					 {% endwith %}
+					<!-- End table-->
+					{% else%}
+						<p>Поки немає учасників у базі</p>
+					{% endif%}
+					<!-- Start pagination-->
+					<div>
+					{% with object_list=children %}
+                  		{% include "children/pagination.html" %}
+          			{% endwith %}
+          			{% block pagination %}{% endblock pagination %}
+					</div>
+					<!-- End pagination-->
+
+{%endblock content%}

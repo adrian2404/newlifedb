@@ -26,6 +26,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#MEDIA STUFF
+MEDIA_URL = '/media/'
+MEDIA_ROOT= os.path.join(BASE_DIR, '..', 'media')
+
 
 # Application definition
 
@@ -82,3 +86,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+from django.conf import global_settings
+
+TEMPLATE_CONTEXT_PROCESSORS = \
+    global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    "django.core.context_processors.request",
+    "newlifedb.context_processors.children_proc",
+    'django.contrib.messages.context_processors.messages',
+    )
